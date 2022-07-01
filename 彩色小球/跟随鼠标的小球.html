@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(210deg, rgba(255, 0, 0, .8), rgba(255, 0, 0, 0) 70.71%),
+                linear-gradient(120deg, rgba(0, 255, 0, .8), rgba(0, 255, 0, 0) 70.71%),
+                linear-gradient(290deg, rgba(0, 0, 255, .8), rgba(0, 0, 255, 0) 70.71%);
+        }
+
+        canvas {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        var html = document.querySelector('html');
+        var height = html.offsetHeight - 1
+        var width = html.offsetWidth - 1
+        var body = document.querySelector('body')
+        body.innerHTML += `<canvas height=${height} width=${width}></canvas>`
+    </script>
+
+    <script>
+        var canvas = document.querySelector('canvas')
+        var Canvas = canvas.getContext('2d')
+        var ballList = []
+        var num = 0
+        canvas.addEventListener('mousemove', function (e) {
+            // if (num % 3 === 0) {
+            //     let ball = new Ball(e.offsetX, e.offsetY)
+            //     ballList.push(ball)
+            // }
+            let ball = new Ball(e.offsetX, e.offsetY)
+            ballList.push(ball)
+            num++
+        })
+        function randomColor() {
+            let colorArray = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
+            let color = '#'
+            for (let i = 0; i < 6; i++) {
+                let index = Math.floor(Math.random() * colorArray.length)
+                color += colorArray[index]
+            }
+            return color
+        }
+        function Ball(x, y) {
+            this.x = x
+            this.y = y
+            this.r = 25
+            this.color = randomColor()
+            this.move_x = parseInt(Math.random() * 20 - 10)
+            this.move_y = parseInt(Math.random() * 20 - 10)
+        }
+        Ball.prototype.rander = function () {
+            Canvas.beginPath()
+            Canvas.arc(this.x, this.y, this.r, 0, 6.28, false)
+            Canvas.fillStyle = this.color
+            Canvas.fill()
+        }
+        Ball.prototype.update = function () {
+            this.x += this.move_x
+            this.y += this.move_y
+            this.r -= .8
+        }
+        setInterval(() => {
+            Canvas.clearRect(0, 0, canvas.width, canvas.height)
+            for (let index = 0; index < ballList.length; index++) {
+                if (ballList[index]['r'] <= 1) {
+                    ballList.splice(index, 1)
+                } else {
+                    ballList[index].update()
+                    ballList[index].rander()
+                }
+            }
+        }, 30);
+        window.addEventListener('resize', function () {
+            let width
+            let height
+            let html = document.querySelector('html');
+            width = html.offsetWidth;
+            height = html.offsetHeight;
+            canvas.width = width;
+            canvas.height = height;
+        })
+    </script>
+</body>
+
+</html>

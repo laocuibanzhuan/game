@@ -1,0 +1,67 @@
+html{
+    height: 100vh;
+}
+.content {
+    width: 640px;
+    height: 640px;
+    margin: 80px auto;
+    position: relative;
+}
+
+.btn{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, .3);
+    z-index: 2;
+}
+.btn button{
+    background: none;
+    border: none;
+    background-size: 100% 100%;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+.startBtn button{
+    font-size: 30px;
+    width: 200px;
+    height: 80px;
+    background-color: aqua;
+    margin-left: -100px;
+    margin-top: -40px;
+}
+
+#snakeWarp {
+    width: 600px;
+    height: 600px;
+    background: #07344e;
+    border: 20px solid #78bce4;
+    position: relative;
+}
+
+#snakeWarp div {
+    text-align: center;
+    color: aliceblue;
+    font-size: 16px;
+    width: 20px;
+    height: 20px;
+}
+
+.snakeHead {
+    background-color: brown;
+    border-radius: 50%;
+
+}
+.snakeBody{
+    background-color: #2a8b5b;
+    border-radius: 50%;
+}
+.food{
+    background-image: url(./apple.png);
+    background-size: cover;
+}
