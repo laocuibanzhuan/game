@@ -68,5 +68,5 @@ init(random_list)
 console.log(random_list);
 setInterval(() => {
     update()
-},400);
+},500);
 
